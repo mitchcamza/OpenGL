@@ -39,11 +39,15 @@ int main(void)
     };
 
 
-    // Define the vertex b0.5f, -0.5f)uffer
+    // Define the vertex buffer
     unsigned int buffer;
-    glGenBuffers(1, &buffer);   // generates a buffer and returns an ID
+    glGenBuffers(1, &buffer);       // generates a buffer and returns an ID
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);   // enable the vertex attribute
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);    // called once per vertex attribute
+  
 
 
     /* Loop until the user closes the window */

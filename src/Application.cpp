@@ -31,18 +31,28 @@ int main(void)
     std::cout << glGetString(GL_VERSION) << std::endl;
 
 
+    // Create an array to store the vertices
+    float positions[6] = { 
+       -0.5f, -0.5f,
+        0.0f,  0.5f,
+        0.5f, -0.5f,
+    };
+
+
+    // Define the vertex b0.5f, -0.5f)uffer
+    unsigned int buffer;
+    glGenBuffers(1, &buffer);   // generates a buffer and returns an ID
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
-        
-        glBegin(GL_TRIANGLES);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f(0.0f, 0.5f);
-        glVertex2f(0.5f, -0.5f);
-        glEnd();
+
+        glDrawArrays(GL_TRIANGLES, 0, 3);   // call to draw the triangle
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
